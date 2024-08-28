@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zoom Jet Packs Lease Agreement</title>
+    <style>
+        body {font-family: Arial, sans-serif;}
+        h2 {color: #333; text-align:center}
+        p {margin-bottom: 1em;}
+        .center {display: block; margin-left: auto; margin-right: auto}
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 6px;
+            text-align: left;
+        }
+        li {padding: 10px 0px}
+    </style>
+</head>
+<body>
+    <img src="{{ url_for('static', filename='Zoom-Jet-Packs-Logo-transparent-background.png', _external=True)}}" 
+        alt="Zoom Jet Packs Logo" class="center" width="200px" height="200px">
+    <h2>ZOOM JET PACKS LEASE AGREEMENT</h2>
+    <p>
+        THIS LEASE AGREEMENT ("Lease") made and entered into this <strong>{{ data.entered_day}}</strong> day of 
+        <strong>{{ data.entered_month }}</strong>, <strong>{{ data.entered_year }}</strong>, by and between 
+        Zoom Jet Packs, LLC, a Delaware limited liability company, hereinafter referred to as "Lessor", and 
+        <strong>{{data.lessee_name }}</strong>, hereinafter referred to as "Lessee".
+    </p>
+    <ol>
+        <li><strong>LEASED EQUIPMENT</strong>: Lessor hereby leases to Lessee <strong>{{ data.number_of_items_text }}</strong> 
+            (<strong>{{ data.number_of_items_number }}</strong>) Zoom Jet Pack{{ data.number_of_items_inflection }} as follows.
+            <table>
+                <tr>
+                    <th>Model Name</th>
+                    <th>Year</th>
+                    <th>JPIN</th>
+                </tr>
+                {% for item in data.jet_pack_list %}
+                <tr>
+                    <td>{{ item.sku }}</td>
+                    <td>{{ item.year }}</td>
+                    <td>{{ item.jpin }}</td>
+                </tr>
+                {% endfor %}
+            </table>        
+        </li>
+        <li><strong>TERM</strong>: The term of this Lease shall commence on <strong>{{ data.lease_start_day_month }}</strong>, 
+            <strong>{{ data.lease_start_year }}</strong> and shall expire on <strong>{{ data.lease_end_day_month }}</strong>, 
+            <strong>{{ data.lease_end_year }}</strong>.</li>
+        <li><strong>PAYMENTS</strong>: Lessee agrees to pay Lessor the sum of $<strong>{{ data.payment_amount }}</strong> per 
+            <strong>{{ data.payment_period }}</strong>.</li>
+        <li><strong>SECURITY DEPOSIT</strong>: Upon execution of this Lease, Lessee will deposit with Lessor the sum of 
+            $<strong>{{ data.security_deposit }}</strong>.</li>
+        <li><strong>USE OF JET PACK</strong>: Lessee shall use the Jet Pack in a careful and proper manner and shall comply with 
+            all laws, ordinances, and regulations relating to the possession, use, or maintenance of the Jet Pack.</li>
+        <li><strong>REPAIR AND MAINTENANCE</strong>: Lessee will, at its own cost and expense, keep the Jet Pack in good repair 
+            and operating condition.</li>
+        <li><strong>INSURANCE</strong>: Lessee shall fully insure the Jet Pack in an amount not less than 
+            $<strong>{{ data.insurance_amount }}</strong>.</li>
+        <li><strong>DEFAULT</strong>: If Lessee fails to comply with any term of this Lease, Lessor may terminate this Lease upon 
+            providing written notice to Lessee.</li>
+        <li><strong>INDEMNITY</strong>: Lessee shall indemnify Lessor against, and hold Lessor harmless from, any and all claims, 
+            actions, suits, proceedings, costs, expenses, damages, and liabilities arising out of the use of the Jet Pack.</li>
+        <li><strong>GOVERNING LAW</strong>: This Lease shall be construed in accordance with the laws of the State of 
+            <strong>{{ data.governing_law }}</strong>.</li>
+    </ol>
+    <p>LESSEE: _______________________                           Date: __________________</p>
+    <p>LESSOR: Zoom Jet Packs, LLC _______________________                           As Of: __________________</p>
+</body>
+</html>

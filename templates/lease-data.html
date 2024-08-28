@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+Lease Data
+{% endblock %}
+{% block content %}
+<table>
+    {% for key, value in lease_data.items() %}
+        <tr>
+            <td>{{ key }}</td>
+            <td>
+                {% if key == 'jet_pack_list' %}
+                    {% for item in value %}
+                        {% for sub_key, sub_value in item.items() %}
+                            <strong>{{ sub_key }}:</strong> {{ sub_value }}<br>
+                        {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    {{ value }}
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

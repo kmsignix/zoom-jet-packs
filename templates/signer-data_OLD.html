@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}
+Signer Data
+{% endblock %}
+{% block content %}
+<table>
+    <tr>
+        <td>Submitter Name</td>
+        <td>{{ data.submitter.name }}</td>
+    </tr>
+    <tr>
+        <td>Submitter Email</td>
+        <td>{{ data.submitter.email }}</td>
+    </tr>
+</table>
+<table>
+    {% for signer in data.signers %}
+    <tr>
+        <td colspan="2"><strong>Signer {{ loop.index }}</strong></td>
+    </tr>
+    <tr>
+        <td>First Name</td>
+        <td>{{ signer.first_name }}</td>
+    </tr>
+    <tr>
+        <td>Middle Name</td>
+        <td>{{ signer.middle_name }}</td>
+    </tr>
+    <tr>
+        <td>Last Name</td>
+        <td>{{ signer.last_name }}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{ signer.email }}</td>
+    </tr>
+    <tr>
+        <td>Service</td>
+        <td>{{ signer.service }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
