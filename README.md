@@ -21,8 +21,7 @@ manager to sign the lease document. Once they have signed, SIGNiX invites the le
 and uses SMS authentication to ensure the signer is as intended.
 
 The code is written to be simple to understand and follow. Transaction, configuration and signer data is statically initialized (in Python / JSON-like 
-object structures), so a database is not necessary. For clarity, the code is not hardened. For example, inputs are not validated / cleaned, as 
-would be the case with a Production system.
+object structures), so a database is not necessary. The code is not hardened. For example, inputs are not validated / cleaned, as would be the case with a Production system. There is also no user or session management, permissions, logging, etc.
 
 **Text Tagging** is the SIGNiX feature initially showcased in this application. Text Tagging was introduced to the SIGNiX
 API in August 2024. It allows signature and other fields to be placed on dynamic documents, anchored by a specific and unique string
@@ -165,11 +164,56 @@ This project has the following components:
   - `Zoom-Jet-Packs-Logo-transparent-background.png` is a logo.
   - `zoom-safety-advisory.pdf` is the PDF version of the safety advisory, with signature and date PDF fields added.
 
-### Construsting the SubmitDocuments API call to SIGNiX
-Explanation of making the call.
+### Constructing the SubmitDocument API call to SIGNiX
+SIGNiX has extensive content for developers in its [DevCommunity](https://www.signix.com/devcommunity). There, [FlexAPI Documentation](https://www.signix.com/apidocumentation) can be found. Specifically, there are details on the [SubmitDocument](https://www.signix.com/apidocumentation#SubmitDocument) method.
+
+The **SubmitDocument** method is a POST that has a body contaiing XML. The XML contains everything needed to create a Signature transaction. This includes transaction metadata, information on the signers, documents and information on the fields on those documents, including signature fields.
+
+When the **submit_tx** function is triggered by the **Sign** menu item, it first collects and generates the documents. It then passes the documents, document configuration data and signer data to the **sx_request_init** function.
+
+The **sx_request_init** function constructs the XML body for the **SubmitDocument** call. The XML is built from the bottom up, starting with creating the form (document) element for each of the documents. Utlimately, the XML is serialized to a string, and this is added as a key-value pair in the object that is returned by the function.
+
+This code demonstrates a way to construct the **SubmitDocument** call. The source data is in JSON-like objects, as visible in the `data_initialize.py` files. An XML object is built from the bottom up, and then serialized, before being submitted as a POST.
 
 ### Text Tagging
-Explanation of text tagging.
+**Text tagging** is a SIGNiX feature that allows signature and other fields to be added to a PDF via the SIGNiX API. It is particularly useful when working with a document generation system that does not have the capability of adding fields to a PDF.
+
+The FlexAPI includes [documentation on the Text Tagging feature](https://www.signix.com/api-text-tagging).
+
+In this project, the lease document is dynamically generated, using a template and lease data. The lease data is in a JSON-like object, as defined in `lease_data_initialize.py`. The template is a Jinja template in HTML format. When the `Data Merged` menu item is clicked, the following call returns the merged document in HTML format:
+```python
+render_template("zoom-lease-agreement.html", data=lease_data)
+```
+The template includes the strings "Date:", "As Of:", "LESSOR:" and "LESSEE:", and these are used as anchors for specifying text tag locations, in the `docs_data_initialize.py` file. This file contains a function that defines Python objects in a JSON-like format, as in the snippet below.
+```JSON
+    docs_data = {
+        "doc_set_description": "Zoom Jet Pack Lease Documents",
+        "docs_list": [
+            {
+                "ref_id": "ZoomJetPackLease",
+                "desc": "Zoom Jet Pack Lease",
+                "file_name": "ZoomJetPackLease.pdf",
+                "mime_type": "application/pdf",
+                "doc_source_type": "dynamic",
+                "doc_source_location": "zoom-lease-agreement.html",
+                "tagging_type": "text_tagging",
+                "tagging_data": [
+                    {
+                        "tag_name": "LesseeDate",
+                        "field_type": "date_signed",
+                        "is_required": "yes",
+                        "anchor_text": "Date:",
+                        "bounding_box": {
+                            "x_offset": 30,
+                            "y_offset": 0,
+                            "width": 90,
+                            "height": 12
+                        }
+                    },
+```
+The **docs_data** object is passed to the **sx_request_init** function, along with the documents, to include them in the **SubmitDocument** request.
+
+This demonstrates a way to configure text tagging in a flexible, JSON-like manner. The functions **sx_element_text_tag_field_create** and **sx_element_text_tag_signature_create** construct the XML object from this data structure, as needed by the **SubmitDocument** call.
 
 ## Contributing
 Guidelines for contributing.
