@@ -1,4 +1,4 @@
-# This function initializes the SIGNiX SubmitDocuments request
+# This function returns a list of PDFs, generating dynamic documents as necessary
 
 import os
 import pdfkit
