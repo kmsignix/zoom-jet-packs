@@ -29,7 +29,7 @@ def docs_data_create():
                         "tag_name": "LessorDate",
                         "field_type": "date_signed",
                         "is_required": "yes",
-                        "anchor_text": "As Of:",
+                        "anchor_text": "As",
                         "bounding_box": {
                             "x_offset": 30,
                             "y_offset": 0,
