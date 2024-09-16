@@ -216,10 +216,10 @@ The **docs_data** object is passed to the **sx_request_init** function, along wi
 This demonstrates a way to configure text tagging in a flexible, JSON-like manner. The functions **sx_element_text_tag_field_create** and **sx_element_text_tag_signature_create** construct the XML object from this data structure, as needed by the **SubmitDocument** call.
 
 ## Contributing
-Guidelines for contributing.
+Guidelines for contributing coming soon.
 
 ## License
-The license under which the project is distributed.
+This project is distributed under the MIT license. See the LICENSE.txt file for details.
 
 ## Contact
-Your contact information.
+Contact information coming soon.
