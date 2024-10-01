@@ -9,7 +9,7 @@ This project is provided as a showcase and tutorial for integrating SIGNiX digit
 into a lease origination system. While the example is for leasing, the general concepts apply to any use case where
 documents are dynamically populated and then signed.
 
-For details on SIGNiX and to get a developer account (required to run this demo), click [here](https://www.signix.com/).
+For details on SIGNiX and to get a developer account (required to run this demo), click [here](https://www.signix.com/blog/text-tagging-for-e-signature-dynamic-documents).
 
 The Python Flask module is used to create a web application, and Jinja templates (included with 
 Flask) are used to generate a dynamically-populated lease document in HTML format. HTML documents are converted to PDF using 
