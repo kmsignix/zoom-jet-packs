@@ -28,6 +28,8 @@ API in August 2024. It allows signature and other fields to be placed on dynamic
 on the page. This is ideal for dynamically populated documents, when they document generation system does not directly support
 the placement of PDF fields and signature tags.
 
+**Marketing Call To Action** is a new SIGNiX feature introduced in November 2024. It is used in this application to provide a "call to action" for both signers, when each completes their signing of documents. This is ideal for an upsell to additional products and services, or to point the user to relevant information or the next step in a process. The call to action can be configured per transaction type, per signer and per transaction.
+
 Over time, this project will be updated to showcase new features.
 
 This application was written to run on WSL and with Visual Studio Code. It should be easily portable to other environments.
@@ -214,6 +216,50 @@ The template includes the strings "Date:", "As Of:", "LESSOR:" and "LESSEE:", an
 The **docs_data** object is passed to the **sx_request_init** function, along with the documents, to include them in the **SubmitDocument** request.
 
 This demonstrates a way to configure text tagging in a flexible, JSON-like manner. The functions **sx_element_text_tag_field_create** and **sx_element_text_tag_signature_create** construct the XML object from this data structure, as needed by the **SubmitDocument** call.
+
+### Marketing Call To Action
+**Marketing Call To Action** is a SIGNiX feature to provide a call to action for signers once they have completed signing documents. This is ideal for an upsell to additional products and services, or to point the user to relevant information or the next step in a process. The call to action can be configured per transaction type, per signer and per transaction.
+
+The Flex API includes documentation on the Call To Action feature.
+
+In this project, there are two calls to action configured: one for the lease manager and one for the lessee. The specification of each call to action is in the JSON-like object that defines information on each of the signers - specifically within the **call_to_action** object, which is a part of each items of the signers list.
+
+In this project, the first call to action prompts the lease manager to learn more about SIGNiX, whereas the second call to action offers a coupon as an incentive for the lessee to purchase accessories from the Zoom store for the jet pack they just leased.
+
+The **call_to_action** object includes the URL to the image displayed on completing signing, plus the image shown when hovering over. The hover-over feature is good for making buttons glow, etc. The object also includes the target URL and location / placement information. “Above text” is good for a banner, while “below text” is good for a traditional image / button / click link.
+
+Both the image URLs and the target URLs can include query parameters, which is useful for communicating transaction-specific or signer-specific information to the image generator or target link. This could be used for highly personalized images or actions, tracking purposes, etc.
+
+```TEXT
+"signers": [
+             {
+                "first_name": submitter_first_name,
+                ...
+                "call_to_action": {
+                    "imageURL": "https://www.signix.com/hubfs/Sample%20Marketing%20Link%20Images/sample%20marketing%20graphic.png",
+                    "imageURLhover": "https://www.signix.com/hubfs/Sample%20Marketing%20Link%20Images/signix-ad-hover.png",
+                    "targetURL": "https://www.signix.com",
+                    "imageLocation": "Above Text",
+                    "imageHeight": 600,
+                    "imageWidth": 600,
+                    "imageAltText": "Learn more about SIGNiX"
+                }
+            },
+            {
+                "first_name": "Max",
+                ...
+                "call_to_action": {
+                    "imageURL": "https://www.signix.com/hubfs/Karl.png",
+                    "imageURLhover": "https://www.signix.com/hubfs/karl-hover.png",
+                    "targetURL": "https://www.figma.com/design/CMr9rSH8McKSACGZyOhPNd/Zoom-Jet-Packs-Store?node-id=0-1&t=dsOv3vlnVL9Sli9c-0",
+                    "imageLocation": "Below Text",
+                    "imageHeight": 600,
+                    "imageWidth": 600,
+                    "imageAltText": "Zoom Jet Packs Store"
+                }
+            }
+        ]
+```
 
 ## Contributing
 Guidelines for contributing coming soon.
