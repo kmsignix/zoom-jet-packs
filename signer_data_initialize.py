@@ -27,9 +27,19 @@ def signer_data_create():
                 "last_name": submitter_last_name,
                 "email": submitter_email,
                 "ssn": default_ssn,
+
                 "dob": default_dob,
                 "mobile_number": default_mobile_number,
-                "service": default_service
+                "service": default_service,
+                "call_to_action": {
+                    "imageURL": "https://www.signix.com/hubfs/Sample%20Marketing%20Link%20Images/sample%20marketing%20graphic.png",
+                    "imageURLhover": "https://www.signix.com/hubfs/Sample%20Marketing%20Link%20Images/signix-ad-hover.png",
+                    "targetURL": "https://www.signix.com",
+                    "imageLocation": "Above Text",
+                    "imageHeight": 600,
+                    "imageWidth": 600,
+                    "imageAltText": "Learn more about SIGNiX"
+                }
             },
             {
                 "first_name": "Max",
@@ -39,7 +49,16 @@ def signer_data_create():
                 "ssn": default_ssn,
                 "dob": default_dob,
                 "mobile_number": os.getenv('signer1_mobile_number'),
-                "service": "SMSOneClick"
+                "service": "SMSOneClick",
+                "call_to_action": {
+                    "imageURL": "https://www.signix.com/hubfs/Karl.png",
+                    "imageURLhover": "https://www.signix.com/hubfs/karl-hover.png",
+                    "targetURL": "https://www.figma.com/design/CMr9rSH8McKSACGZyOhPNd/Zoom-Jet-Packs-Store?node-id=0-1&t=dsOv3vlnVL9Sli9c-0",
+                    "imageLocation": "Below Text",
+                    "imageHeight": 600,
+                    "imageWidth": 600,
+                    "imageAltText": "Zoom Jet Packs Store"
+                }
             }
         ]
     }

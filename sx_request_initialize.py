@@ -74,6 +74,25 @@ def sx_request_init(docs_list, docs_data, signer_data):
 
     member_info_list = []
     for i, signer in enumerate(signer_data['signers']):
+        
+        #imageURL=signer['call_to_action']["imageURL"]
+        #targetURL=signer['call_to_action']["targetURL"]
+        #imageAltText=signer['call_to_action']["imageAltText"]
+        #imageURLhover=signer['call_to_action']["imageURLhover"]
+        #imageLocation=signer['call_to_action']["imageLocation"]
+        #imageHeight=signer['call_to_action']["imageHeight"]
+        #imageWidth=signer['call_to_action']["imageWidth"]
+
+        call_to_action = sx_element_call_to_action(
+            imageURL=signer['call_to_action']["imageURL"],
+            targetURL=signer['call_to_action']["targetURL"],
+            imageAltText=signer['call_to_action']["imageAltText"],
+            imageURLhover=signer['call_to_action']["imageURLhover"],
+            imageLocation=signer['call_to_action']["imageLocation"],
+            imageHeight=signer['call_to_action']["imageHeight"],
+            imageWidth=signer['call_to_action']["imageWidth"]
+        )
+
         member_info_element = sx_element_member_info_create(
             ref_id=f"Signer {i}",
             ssn=signer['ssn'], 
@@ -83,8 +102,10 @@ def sx_request_init(docs_list, docs_data, signer_data):
             last_name=signer['last_name'],
             email=signer['email'],
             mobile_number=signer['mobile_number'],
-            service=signer['service']
+            service=signer['service'],
+            call_to_action=call_to_action
         )
+
         member_info_list.append(member_info_element)
 
     data = sx_element_data_create(

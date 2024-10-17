@@ -31,7 +31,23 @@ def sx_element_cust_info_create(sponsor, client, user_id, pswd, workgroup, demo,
 
     return cust_info
 
-def sx_element_member_info_create(ref_id, ssn, dob, first_name, middle_name, last_name, email, mobile_number, service):
+def sx_element_call_to_action(imageURL, targetURL, imageAltText, imageURLhover, imageLocation, imageHeight, imageWidth):
+    call_to_action = ET.Element("PostSignatureImageLink")
+
+    ET.SubElement(call_to_action, "ImageURL").text = imageURL
+    ET.SubElement(call_to_action, "TargetURL").text = targetURL
+    ET.SubElement(call_to_action, "ImageAltText").text = imageAltText
+    ET.SubElement(call_to_action, "ImageHoverURL").text = imageURLhover
+    if imageLocation == "Above Text":
+        ET.SubElement(call_to_action, "IsImageLocationAboveText").text = "yes"
+    else:
+        ET.SubElement(call_to_action, "IsImageLocationAboveText").text = "no"
+    ET.SubElement(call_to_action, "ImageHeight").text = str(imageHeight)
+    ET.SubElement(call_to_action, "ImageWidth").text = str(imageWidth)
+
+    return call_to_action
+
+def sx_element_member_info_create(ref_id, ssn, dob, first_name, middle_name, last_name, email, mobile_number, service, call_to_action):
     member_info = ET.Element("MemberInfo")
 
     ET.SubElement(member_info, "RefID").text = ref_id
@@ -43,6 +59,8 @@ def sx_element_member_info_create(ref_id, ssn, dob, first_name, middle_name, las
     ET.SubElement(member_info, "Email").text = email
     ET.SubElement(member_info, "Service").text = service
     ET.SubElement(member_info, "MobileNumber").text = mobile_number
+
+    member_info.append(call_to_action)
 
     return member_info
 
