@@ -28,7 +28,7 @@ API in August 2024. It allows signature and other fields to be placed on dynamic
 on the page. This is ideal for dynamically populated documents, when they document generation system does not directly support
 the placement of PDF fields and signature tags.
 
-**Digital Dashboard** is a new SIGNiX feature introduced in November 2024. It is used in this application to provide a "call to action" for both signers, when each completes their signing of documents. This is ideal for an upsell to additional products and services, or to point the user to relevant information or the next step in a process. The call to action can be configured per transaction type, per signer and per transaction.
+**Digital Billboard** is a new SIGNiX feature introduced in November 2024. It is used in this application to provide a "call to action" for both signers, when each completes their signing of documents. This is ideal for an upsell to additional products and services, or to point the user to relevant information or the next step in a process. The call to action can be configured per transaction type, per signer and per transaction.
 
 Over time, this project will be updated to showcase new features.
 
@@ -142,7 +142,7 @@ Review the second safety advisory document. Click **Sign**.
 Enter your password to legally bind your signature to the documents, and click **Sign**.
 ![019-SIGNiX-bind](https://github.com/user-attachments/assets/b9c687fd-f5cf-46a5-9891-18a18f70aefb)
 
-View the end-of-signing Digital Dashboard / call-to-action. This is to encourage the lessee to now visit the accessories store, and presents a valuable coupon. Click on the link to visit the store, click **Review** to review the document, or click **Logout**.
+View the end-of-signing Digital Billboard / call-to-action. This is to encourage the lessee to now visit the accessories store, and presents a valuable coupon. Click on the link to visit the store, click **Review** to review the document, or click **Logout**.
 ![020-SIGNiX-call-to-action](https://github.com/user-attachments/assets/b548798f-d33d-4c8b-bfc0-b8e506cd57b7)
 
 At the end of the signing, both the lessor and the lesse are sent emails for them to download the documents.
@@ -217,10 +217,10 @@ The **docs_data** object is passed to the **sx_request_init** function, along wi
 
 This demonstrates a way to configure text tagging in a flexible, JSON-like manner. The functions **sx_element_text_tag_field_create** and **sx_element_text_tag_signature_create** construct the XML object from this data structure, as needed by the **SubmitDocument** call.
 
-### Digital Dashboard
-**Digital Dashboard** is a SIGNiX feature to provide a call to action for signers once they have completed signing documents. This is ideal for an upsell to additional products and services, or to point the user to relevant information or the next step in a process. The call to action can be configured per transaction type, per signer and per transaction.
+### Digital Billboard
+**Digital Billboard** is a SIGNiX feature to provide a call to action for signers once they have completed signing documents. This is ideal for an upsell to additional products and services, or to point the user to relevant information or the next step in a process. The call to action can be configured per transaction type, per signer and per transaction.
 
-The Flex API includes documentation on the Digital Dashboard feature.
+The Flex API includes documentation on the Digital Billboard feature.
 
 In this project, there are two calls to action configured: one for the lease manager and one for the lessee. The specification of each call to action is in the JSON-like object that defines information on each of the signers - specifically within the **call_to_action** object, which is a part of each items of the signers list.
 
